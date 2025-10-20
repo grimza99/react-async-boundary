@@ -1,0 +1,38 @@
+{
+  "name": "react-async-boundary",
+  "version": "0.1.0",
+  "description": "React Suspense + ErrorBoundary 통합 컴포넌트",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --external react",
+    "dev": "tsup src/index.ts --watch"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "react": "^18.2.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.4.0"
+  },
+  "keywords": [
+    "react",
+    "suspense",
+    "error-boundary",
+    "async",
+    "boundary"
+  ],
+  "author": "grimza99",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grimza99/react-async-boundary"
+  },
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
+}
