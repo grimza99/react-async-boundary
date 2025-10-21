@@ -13,8 +13,8 @@ export function AsyncBoundary({
   children,
 }: AsyncBoundaryProps) {
   return (
-    <Suspense fallback={loadingFallback}>
-      <ErrorBoundary fallback={errorFallback}>{children}</ErrorBoundary>
-    </Suspense>
+    <ErrorBoundary fallback={errorFallback}>
+      <Suspense fallback={loadingFallback}>{children} </Suspense>
+    </ErrorBoundary>
   );
 }
