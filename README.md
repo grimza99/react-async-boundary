@@ -1,4 +1,4 @@
-# 🧱 @grimza/react-async-boundary
+# 🧱 @grimza99/react-async-boundary
 
 > Integrated **React Suspense + ErrorBoundary** wrapper for async components  
 >  
@@ -87,5 +87,4 @@ export default function ErrorComponent() {
 ## 📦 Installation 
 
 ```bash
-npm install @grimza/react-async-boundary
-
+npm i @grimza99/react-async-boundary
