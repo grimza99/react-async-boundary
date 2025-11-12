@@ -1,30 +1,43 @@
-// src/hooks/useAsync.ts
-import { useRef } from "react";
+import { useCallback } from "react";
 
-type AsyncState<T> = {
+type Record<T> = {
   promise?: Promise<T>;
   data?: T;
   error?: Error;
 };
 
-export function useAsyncBoundary<T>(asyncFn: () => Promise<T>): { data: T } {
-  const state = useRef<AsyncState<T>>({});
+const globalCache = new Map<any, Record<any>>();
 
-  if (!state.current.promise) {
-    state.current.promise = asyncFn()
-      .then((res) => (state.current.data = res))
-      .catch((err) => (state.current.error = err));
-
-    throw state.current.promise;
+function readFromCache<T>(key: any, loader: () => Promise<T>): T | Error {
+  let rec = globalCache.get(key) as Record<T> | undefined;
+  if (!rec) {
+    rec = {};
+    globalCache.set(key, rec);
   }
 
-  if (state.current.error) {
-    throw state.current.error;
+  if (rec.data !== undefined) return rec.data;
+  if (rec.error) throw rec.error;
+
+  if (!rec.promise) {
+    rec.promise = loader()
+      .then((d) => {
+        rec!.data = d;
+        return d;
+      })
+      .catch((e) => {
+        rec!.error = e;
+        throw e;
+      });
   }
 
-  if (state.current.data !== undefined) {
-    return { data: state.current.data };
-  }
+  throw rec.promise;
+}
 
-  throw state.current.promise;
+export function useAsyncBoundary<T>(
+  asyncFn: () => Promise<T>,
+  key: string | number | symbol
+): { data: T | Error } {
+  const stableFn = useCallback(asyncFn, [key]);
+  const data = readFromCache<T>(key, stableFn);
+  return { data };
 }
