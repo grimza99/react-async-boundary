@@ -10,7 +10,11 @@
   ],
   "scripts": {
     "build": "pnpm tsup src/index.ts --format esm,cjs --dts --external react,react-dom",
-    "dev": "tsup src/index.ts --watch"
+    "dev": "tsup src/index.ts --watch",
+    "release": "node ./scripts/release.js",
+    "release:patch": "npm run release -- patch",
+    "release:minor": "npm run release -- minor",
+    "release:major": "npm run release -- major"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
