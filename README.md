@@ -23,19 +23,19 @@ Suspense와 ErrorBoundary의 로직을 직접 작성하지 않아도,
 ## usage
 
 ### application
-```bash
+```js
 ...
       <AsyncBoundary
           loadingFallback={<div>loading...</div>}
           errorFallback={<div>error!</div>}
         >
-          <ErrorComponent />
+          <ExampleComponent />
         </AsyncBoundary>
 ```
 
 **or**
 
-```bash
+```js
 ...
       <AsyncBoundary
           loadingFallback={<div>loading...</div>}
@@ -46,42 +46,28 @@ Suspense와 ErrorBoundary의 로직을 직접 작성하지 않아도,
             </div>
           )}
         >
-          <ErrorComponent />
+          <ExampleComponent />
         </AsyncBoundary>
 ```
 
-### ErrorComponent
+### ExampleComponent
 e.g.)
 
-```
-const cache = {
-  promise: null,
-  data: null,
-  error: null,
-};
-function fetchImage() {
-  if (!cache.promise) {
-    cache.promise = new Promise((resolve, reject) => {
-      //...asyncFn
-    })
-      .then((res) => (cache.data = res))
-      .catch((err) => (cache.error = err));
-    throw cache.promise;
-
+```js
+import { useAsyncBoundary } from "@grimza99/react-async-boundary";
+...
 export default function ErrorComponent() {
-  const image = fetchImage(true);
+  const { data } = useAsyncBoundary(asyncFn);
 
-  if (image instanceof Error) {
-    throw error;
-  }
   return (
+    <div>
       <img
-        src={image}
+        src={data}
         ...
       />
+    </div>
   );
 }
-
 ```
 
 ## 📦 Installation 
