@@ -4,19 +4,9 @@
 >  
 > 비동기 컴포넌트를 위한 **React Suspense + ErrorBoundary 통합 래퍼 라이브러리**
 
----
-
-## 🌍 Overview | 개요
-
-### 🇺🇸 English  
 `@grimza/react-async-boundary` is a lightweight utility library that simplifies asynchronous rendering in React.  
 It provides a unified component (`<AsyncBoundary>`) and a hook (`useAsync`) to seamlessly handle loading, error, and success states —  
 without manually writing complex Suspense + ErrorBoundary logic.
-
-### 🇰🇷 한국어  
-`@grimza/react-async-boundary`는 React의 비동기 렌더링을 단순화하는 경량 유틸리티 라이브러리입니다.  
-Suspense와 ErrorBoundary의 로직을 직접 작성하지 않아도,  
-하나의 컴포넌트(`AsyncBoundary`)만으로 로딩, 성공, 에러 상태를 손쉽게 관리할 수 있습니다.
 
 ---
 
@@ -24,6 +14,8 @@ Suspense와 ErrorBoundary의 로직을 직접 작성하지 않아도,
 
 ### application
 ```js
+import { AsyncBoundary } from "@grimza99/react-async-boundary";
+
 ...
       <AsyncBoundary
           loadingFallback={<div>loading...</div>}
@@ -36,6 +28,8 @@ Suspense와 ErrorBoundary의 로직을 직접 작성하지 않아도,
 **or**
 
 ```js
+import { AsyncBoundary } from "@grimza99/react-async-boundary";
+
 ...
       <AsyncBoundary
           loadingFallback={<div>loading...</div>}
@@ -53,11 +47,13 @@ Suspense와 ErrorBoundary의 로직을 직접 작성하지 않아도,
 ### ExampleComponent
 e.g.)
 
+>  You must use useAsyncBoundary in order to trigger the ErrorBoundary fallback UI.
+> A stable key must be provided to prevent repeated re-execution within Suspense, which can otherwise cause continuous re-rendering and infinite fallback cycles.
 ```js
 import { useAsyncBoundary } from "@grimza99/react-async-boundary";
 ...
-export default function ErrorComponent() {
-  const { data } = useAsyncBoundary(asyncFn);
+export default function ExampleComponent() {
+  const { data } = useAsyncBoundary(()=>yourAsyncFn(),'key'); 
 
   return (
     <div>
