@@ -14,17 +14,27 @@
     "release": "node ./scripts/release.js",
     "release:patch": "npm run release -- patch",
     "release:minor": "npm run release -- minor",
-    "release:major": "npm run release -- major"
+    "release:major": "npm run release -- major",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
+    "@vitest/ui": "^4.0.10",
+    "jsdom": "^27.2.0",
+    "msw": "^2.12.1",
     "tsup": "^7.2.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "undici": "^7.16.0",
+    "vitest": "^4.0.8"
   },
   "keywords": [
     "react",
@@ -39,5 +49,8 @@
     "type": "git",
     "url": "https://github.com/grimza99/react-async-boundary"
   },
-  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748",
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.1"
+  }
 }
