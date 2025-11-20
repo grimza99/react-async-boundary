@@ -19,6 +19,6 @@ export const mswHandlers = [
   }),
   /**authorization error */
   http.get(AUTHORIZATION_ERROR_URL, () => {
-    return new HttpResponse(null, { status: 404 });
+    return new HttpResponse(null, { status: 401 });
   }),
 ];
