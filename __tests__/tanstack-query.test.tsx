@@ -29,7 +29,6 @@ const reactQueryFn = async (url: string) => {
         const parsedData = JSON.parse(data);
         return parsedData;
       } catch (error) {
-        console.error("❌ fetch 에러 발생:", error);
         throw error;
       }
     },
